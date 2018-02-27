@@ -15,7 +15,14 @@ export class ShoppingListService {
     }
 
     addIngredient(ingredient: Ingredient) {
+        // TODO add check on existing ingredient and sumarize amount insted of adding new record
         this.ingredients.push(ingredient);
+        this.ingredientChanged.emit(this.ingredients.slice());
+    }
+
+    addIngredients(ingredients: Ingredient[]) {
+        // TODO add check on existing ingredient and sumarize amount insted of adding new record
+        this.ingredients.push(...ingredients);
         this.ingredientChanged.emit(this.ingredients.slice());
     }
 }
