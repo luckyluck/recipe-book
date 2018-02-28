@@ -10,6 +10,7 @@ export class RecipeService {
 
     private recipes: Recipe[] = [
         new Recipe(
+            1,
             'A Test Recipe',
             'This is simply a test number one',
             'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
@@ -19,6 +20,7 @@ export class RecipeService {
             ]
         ),
         new Recipe(
+            2,
             'Another Test Recipe',
             'This is simply a test number two',
             'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
@@ -33,6 +35,10 @@ export class RecipeService {
 
     getRecipes() {
         return this.recipes.slice();
+    }
+
+    getRecipe(id: number): Recipe {
+        return this.recipes.find(recipe => recipe.id === id);
     }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
