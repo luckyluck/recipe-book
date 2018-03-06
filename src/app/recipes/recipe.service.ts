@@ -58,8 +58,13 @@ export class RecipeService {
             if (recipe.id === newRecipe.id) {
                 this.recipes[index] = newRecipe;
             }
-        })
+        });
         // this.recipes[index] = newRecipe;
+        this.recipeChanged.next(this.recipes.slice());
+    }
+
+    deleteRecipe(recipe: Recipe) {
+        this.recipes = this.recipes.filter(item => item.id !== recipe.id);
         this.recipeChanged.next(this.recipes.slice());
     }
 }
