@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import Recipe from './recipe.model';
 import Ingredient from '../shared/ingredient.model';
 import { ShoppingListService } from './../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
+    recipeChanged = new Subject<Recipe[]>();
     private recipes: Recipe[] = [
         new Recipe(
             1,
@@ -41,5 +43,23 @@ export class RecipeService {
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
+    }
+
+    addRecipe(recipe: Recipe) {
+        // TODO generate ID in another way
+        const newRecipe = Object.assign({}, recipe, { id: this.recipes.length + 1 });
+
+        this.recipes.push(newRecipe);
+        this.recipeChanged.next(this.recipes.slice());
+    }
+
+    updateRecipe(newRecipe: Recipe) {
+        this.recipes.forEach((recipe, index) => {
+            if (recipe.id === newRecipe.id) {
+                this.recipes[index] = newRecipe;
+            }
+        })
+        // this.recipes[index] = newRecipe;
+        this.recipeChanged.next(this.recipes.slice());
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
+import Recipe from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -19,14 +20,28 @@ export class RecipeEditComponent implements OnInit {
         this.route.params.subscribe(
             (params: Params) => {
                 this.id = +params['id'];
-                this.editMode = params['id'] !== null;
+                this.editMode = Number.isInteger(this.id);
                 this.initForm();
             }
         );
     }
 
     onSubmit() {
-        console.log(this.recipeForm);
+        // TODO decide what to do with IDs
+        // TODO rethink creating new object
+        const recipe = new Recipe(
+            this.id,
+            this.recipeForm.value['name'],
+            this.recipeForm.value['description'],
+            this.recipeForm.value['imagePath'],
+            this.recipeForm.value['ingredients']
+        );
+        console.log('editMode - ', this.editMode);
+        if (this.editMode) {
+            this.recipeService.updateRecipe(recipe);
+        } else {
+            this.recipeService.addRecipe(recipe);
+        }
     }
 
     onAddIngredient() {
@@ -39,6 +54,10 @@ export class RecipeEditComponent implements OnInit {
                 ])
             })
         );
+    }
+
+    onDeleteIngredient(index: number) {
+        (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
     }
 
     private initForm() {
