@@ -19,6 +19,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { RecipeService } from './recipes/recipe.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { Globals } from './shared/globals';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { Globals } from './shared/globals';
         ShoppingEditComponent,
         DropdownDirective,
         RecipeStartComponent,
-        RecipeEditComponent
+        RecipeEditComponent,
+        SignupComponent,
+        SigninComponent
     ],
     imports: [
         BrowserModule,
