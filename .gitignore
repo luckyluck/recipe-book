@@ -42,3 +42,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Temporary added into ignore to save connection URL
+src/app/shared/globals.ts
