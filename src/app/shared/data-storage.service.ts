@@ -26,6 +26,13 @@ export class DataStorageService {
         this.http.get(`${this.globals.BASE_URL}recipes.json`)
             .subscribe(
                 (response: Recipe[]) => {
+                    const recipes = response.map(recipe => {
+                        if (!recipe.ingredients) {
+                            recipe.ingredients = [];
+                        }
+
+                        return recipe;
+                    });
                     this.recipeService.setRecipes(response);
                 }
             );
