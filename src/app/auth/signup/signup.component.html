@@ -1,15 +1,16 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
-        <form (ngSubmit)="onSubmit(f)" #f>
+        <span class="help-block text-error text-center">{{ errorText }}</span>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="form-group">
                 <label for="email">Mail</label>
-                <input type="text" id="email" name="email" class="form-control" ngModel>
+                <input type="text" id="email" name="email" class="form-control" required email ngModel>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" ngModel>
+                <input type="password" id="password" name="password" class="form-control" required minlength="6" ngModel>
             </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Sign Up</button>
         </form>
     </div>
 </div>
