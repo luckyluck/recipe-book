@@ -9,12 +9,6 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { RecipeService } from './recipes/recipe.service';
-import { DataStorageService } from './shared/data-storage.service';
-import { Globals } from './shared/globals';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
 
 
 @NgModule({
@@ -30,14 +24,7 @@ import { AuthGuard } from './auth/auth.guard';
         ShoppingListModule,
         CoreModule
     ],
-    providers: [
-        ShoppingListService,
-        RecipeService,
-        DataStorageService,
-        AuthService,
-        Globals,
-        AuthGuard
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {
