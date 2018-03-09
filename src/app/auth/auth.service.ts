@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 
 export class AuthService {
+    token: string;
 
     signupUser(email: string, password: string) {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -10,7 +11,12 @@ export class AuthService {
         return firebase.auth().signInWithEmailAndPassword(email, password)
             .then(
                 response => {
-                    console.log(response);
+                    firebase.auth().currentUser.getIdToken()
+                        .then(
+                            (token: string) => {
+                                this.token = token;
+                            }
+                        );
                 }
             )
             .catch(
@@ -18,6 +24,18 @@ export class AuthService {
                     console.log(error);
                 }
             );
+    }
+
+    // Firebase will check if the token is valid or not and/or return new one
+    getToken(): Promise<any> {
+        firebase.auth().currentUser.getIdToken()
+            .then(
+                (token: string) => {
+                    this.token = token;
+                }
+            );
+
+        return this.token;
     }
 
 }
