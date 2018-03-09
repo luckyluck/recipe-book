@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 
 // TODO implement canLoad guard for lazy load route
