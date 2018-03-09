@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     // Firebase will check if the token is valid or not and/or return new one
-    getToken(): Promise<any> {
+    getToken() {
         firebase.auth().currentUser.getIdToken()
             .then(
                 (token: string) => {
