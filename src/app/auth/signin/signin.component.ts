@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
+    errorText = '';
 
     constructor(private authService: AuthService) { }
 
@@ -16,7 +17,13 @@ export class SigninComponent {
         const email = form.value.email;
         const password = form.value.password;
 
-        this.authService.signinUser(email, password);
+        this.authService.signinUser(email, password)
+            .catch(
+                error => {
+                    console.log(error);
+                    this.errorText = error.message;
+                }
+            );
     }
 
 }
