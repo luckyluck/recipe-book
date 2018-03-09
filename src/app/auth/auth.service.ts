@@ -26,6 +26,11 @@ export class AuthService {
             );
     }
 
+    logout() {
+        firebase.auth().signOut();
+        this.token = undefined;
+    }
+
     // Firebase will check if the token is valid or not and/or return new one
     getToken() {
         firebase.auth().currentUser.getIdToken()
